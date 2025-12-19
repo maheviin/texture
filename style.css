@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    background-color: rgb(4, 0, 255);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 40px;
+}
+
+#buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+    max-width: 90vw;
+    padding: 12px;
+}
+
+.texture-button {
+    width: 200px;
+    height: 48px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: transform 0.16s ease, background 0.16s ease;
+}
+
+.texture-button:hover {
+    transform: translateY(-4px) scale(1.03);
+    background: rgba(255,255,255,0.03);
+}
