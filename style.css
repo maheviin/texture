@@ -1,19 +1,35 @@
+:root {
+  font-size: 24px;
+}
+
 body {
     margin: 0;
     background-color: rgb(4, 0, 255);
     color: white;
     font-family: 'Montserrat', sans-serif;
     font-weight: 200;
+      font-size: 1rem;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+}
+
+/*This keeps <h1> centered on big screens 
+but moves it to the top on narrow screens 
+to prevent it from disappearing.*/
+@media (max-width: 600px) {
+    body {
+        justify-content: flex-start; /* top-align on small screens */
+    }
 }
 
 h1 {
-    margin-bottom: 40px;
+    margin: 20px 0; /* smaller vertical margin */
+    font-size: clamp(2rem, 10vw, 5rem); 
+    text-align: center;
 }
 
 #buttons-container {
@@ -30,7 +46,7 @@ h1 {
     width: 200px;
     height: 48px;
     border: 2px solid white;
-    background: transparent;
+    background: rgb(4, 0, 255);
     color: white;
     cursor: pointer;
     display: inline-flex;
@@ -38,11 +54,11 @@ h1 {
     justify-content: center;
     text-align: center;
     padding: 6px 12px;
-    border-radius: 6px;
     transition: transform 0.16s ease, background 0.16s ease;
 }
 
 .texture-button:hover {
     transform: translateY(-4px) scale(1.03);
-    background: rgba(255,255,255,0.03);
+    background: rgb(217, 255, 0);
+        color:rgb(0, 0, 0)
 }
