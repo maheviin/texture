@@ -1,7 +1,9 @@
-import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from './three.js-master/build/three.module.js';
+import { GLTFLoader } from './three.js-master/examples/jsm/loaders/GLTFLoader.js';
+
 
 const container = document.getElementById('car-viewer');
+console.log('car.js loaded');
 
 // Scene
 const scene = new THREE.Scene();
@@ -14,47 +16,36 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.set(0, 1.5, 4);
+camera.position.set(0, 2, 6);
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(container.clientWidth, container.clientHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
 container.appendChild(renderer.domElement);
 
 // Light
-const ambient = new THREE.AmbientLight(0xffffff, 1);
-scene.add(ambient);
+scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+const dir = new THREE.DirectionalLight(0xffffff, 1);
+dir.position.set(5, 5, 5);
+scene.add(dir);
 
-const directional = new THREE.DirectionalLight(0xffffff, 1);
-directional.position.set(5, 5, 5);
-scene.add(directional);
-
-// Load car
+// Load model
 const loader = new GLTFLoader();
 loader.load(
   './car/scene.gltf',
   (gltf) => {
     const model = gltf.scene;
-    model.scale.set(1, 1, 1); // adjust if too big/small
+    model.scale.set(1, 1, 1);
     scene.add(model);
+    console.log('Car loaded');
   },
   undefined,
-  (error) => {
-    console.error(error);
-  }
+  (e) => console.error(e)
 );
 
-// Render loop
+// Render
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
 animate();
-
-// Resize handling
-window.addEventListener('resize', () => {
-  camera.aspect = container.clientWidth / container.clientHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(container.clientWidth, container.clientHeight);
-});
