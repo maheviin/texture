@@ -5,11 +5,13 @@ fetch("./manifest.json")
     .then(data => {
         const list = data.catalogue || data;
         list.forEach(item => {
-            const btn = document.createElement("div");
-            btn.className = "texture-button";
-            btn.textContent = item.name;
+            const a = document.createElement("a");
+            a.className = "texture-button";
+            a.textContent = item.niceName || item.name;
+            a.href = `gallery.html?name=${encodeURIComponent(item.name)}`;
+            a.title = `Open ${item.niceName || item.name}`;
 
-            container.appendChild(btn);
+            container.appendChild(a);
         });
     })
     .catch(err => {

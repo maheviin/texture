@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="gallery-header">
+    <h1 id="gallery-title">Textures</h1>
+    <a href="index.html" class="back-button">Back</a>
+  </div>
+
+  <div id="gallery" class="gallery-grid"></div>
+
+  <script>
+    function qs(name) {
+      const params = new URLSearchParams(location.search);
+      return params.get(name);
+    }
+
+    const category = qs('name');
+    const titleEl = document.getElementById('gallery-title');
+    const gallery = document.getElementById('gallery');
+
+    if (!category) {
+      titleEl.textContent = 'No category specified';
+      gallery.textContent = 'Use the index page to pick a category.';
+    } else {
+      fetch('./manifest.json')
+        .then(r => r.json())
+        .then(manifest => {
+          const info = manifest.info || {};
+          const list = manifest.catalogue || manifest;
+          const item = list.find(i => i.name === category);
+          titleEl.textContent = item ? (item.niceName || item.name) : category;
+
+          if (!item) {
+            gallery.textContent = 'Category not found in manifest.';
+            return;
+          }
+
+          const base = (info.base_url || '.') + '/' + (info.textures_folder || 'textures') + '/' + item.name + '/';
+
+          item.files.forEach(fname => {
+            const img = document.createElement('img');
+            img.className = 'thumb';
+            img.src = base + fname;
+            img.alt = fname;
+            gallery.appendChild(img);
+          });
+        })
+        .catch(err => {
+          titleEl.textContent = 'Failed to load manifest';
+          gallery.textContent = 'Check console for details.';
+          console.error(err);
+        });
+    }
+  </script>
+</body>
+</html>
