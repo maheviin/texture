@@ -104,9 +104,7 @@ window.addEventListener('texture-selected', (ev) => {
   textureLoader.load(
     src,
     (tex) => {
-      // GLTF albedo should be sRGB
       tex.encoding = THREE.sRGBEncoding;
-      // glTF texture orientation expects flipY = false when applied to GLTF materials
       tex.flipY = false;
 
       carModel.traverse((child) => {
@@ -114,17 +112,14 @@ window.addEventListener('texture-selected', (ev) => {
         const mats = Array.isArray(child.material) ? child.material : [child.material];
         mats.forEach((mat) => {
           if (!mat) return;
-          // apply as base color / map
-          if ('map' in mat) {
+          // Apply texture only if the material color is e7e7e7
+          if (mat.color && mat.color.getHexString() === 'e7e7e7') {
             mat.map = tex;
-            // clear any color tint so texture displays accurately
-            if (mat.color) mat.color.set(0xffffff);
             mat.needsUpdate = true;
+            console.log('Texture applied to material with color e7e7e7');
           }
         });
       });
-
-      console.log('Texture applied');
     },
     undefined,
     (err) => console.error('Texture load error', err)
