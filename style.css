@@ -74,10 +74,14 @@ h1 {
 
 .gallery-header {
   display: flex;
+  background: rgb(4, 0, 255);
   justify-content: space-between; /* h1 left, back right */
   align-items: center;
   width: 100%;
   margin: 20px auto;
+
+  position: relative; /* Enable stacking context */
+  z-index: 10; /* Bring the header forward */
 }
 
 .back-button {
@@ -137,4 +141,7 @@ h1 {
   justify-self: center; /* Center within its column */
   width: 100%; /* Take up full width of its column */
   height: 600px; /* Maintain height */
+  position: sticky; /* Stick to a specific position during scroll */
+  top: 60%; /* Align to the middle of the viewport */
+  transform: translateY(-50%); /* Adjust for exact centering */
 }
