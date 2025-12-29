@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gallery</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -21,19 +20,21 @@
       <div id="car-viewer"></div>
     </div>
   </main>
+
+  <!-- Import map for Three.js -->
   <script type="importmap">
-{
+  {
     "imports": {
       "three": "./three.js-master/build/three.module.js",
       "three/addons/": "./three.js-master/examples/jsm/"
     }
-}
-</script>
+  }
+  </script>
 
+  <!-- 3D car viewer -->
   <script type="module" src="car.js"></script>
 
-
-
+  <!-- Gallery logic -->
   <script>
     function qs(name) {
       const params = new URLSearchParams(location.search);
@@ -54,27 +55,39 @@
           const info = manifest.info || {};
           const list = manifest.catalogue || manifest;
           const item = list.find(i => i.name === category);
-          titleEl.textContent = item ? (item.niceName || item.name) : category;
+
+          titleEl.textContent = item
+            ? (item.niceName || item.name)
+            : category;
 
           if (!item) {
             gallery.textContent = 'Category not found in manifest.';
             return;
           }
 
-          const base = (info.base_url || '.') + '/' + (info.textures_folder || 'textures') + '/' + item.name + '/';
+          const base =
+            (info.base_url || '.') + '/' +
+            (info.textures_folder || 'textures') + '/' +
+            item.name + '/';
 
           item.files.forEach(fname => {
             const img = document.createElement('img');
             img.className = 'thumb';
             img.src = base + fname;
             img.alt = fname;
-            // clicking a thumbnail will dispatch a custom event with the texture URL
+
             img.addEventListener('click', () => {
-              // highlight selected
-              document.querySelectorAll('.thumb').forEach(t => t.classList.remove('selected'));
+              // remove highlight from all thumbnails
+              document.querySelectorAll('.thumb')
+                .forEach(t => t.classList.remove('selected'));
+
+              // highlight this one
               img.classList.add('selected');
 
-              const ev = new CustomEvent('texture-selected', { detail: { src: img.src, name: fname } });
+              // notify car.js
+              const ev = new CustomEvent('texture-selected', {
+                detail: { src: img.src, name: fname }
+              });
               window.dispatchEvent(ev);
             });
 
@@ -89,5 +102,4 @@
     }
   </script>
 </body>
-
 </html>
