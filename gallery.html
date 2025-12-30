@@ -10,14 +10,14 @@
 
 <body>
   <div class="gallery-header">
-    <h1 id="gallery-title">Textures</h1>
-    <a href="index.html" class="back-button">Back</a>
+    <h1 id="gallery-title" tabindex="0">Textures</h1>
+    <a href="index.html" class="back-button" tabindex="0">Back</a>
   </div>
 
   <main>
-    <div id="gallery" class="gallery-grid"></div>
+    <div id="gallery" class="gallery-grid" tabindex="0" aria-label="Gallery grid"></div>
 
-    <div class="car">
+    <div class="car" tabindex="0" aria-label="Car render">
       <div id="car-viewer"></div>
     </div>
   </main>
@@ -103,7 +103,7 @@
     }
   </script>
 
-  <footer class="gallery-footer">
+  <footer class="gallery-footer" tabindex="0">
     This work is based on <a href="https://sketchfab.com/3d-models/car-2f00a5cb6263445cbee828fabd7e0632" target="_blank">"Car"</a> by <a href="https://sketchfab.com/Deepu.Dra" target="_blank">Tech developers</a> licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY-4.0</a>.
   </footer>
 </body>

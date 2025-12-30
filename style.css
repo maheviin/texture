@@ -3,7 +3,7 @@
 }
 
 body {
-  margin: 0px 40px 40px 40px;
+  margin: 0px 40px 0px 40px;
   background-color: rgb(4, 0, 255);
   color: white;
   font-family: 'Montserrat', sans-serif;
@@ -150,15 +150,16 @@ h1 {
 .gallery-footer {
   margin-top: 20px;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.8); /* Dark background for contrast */
-  color: white; /* White text for readability */
+  background-color: white; /* Dark background for contrast */
+  color: black; /* White text for readability */
   text-align: center;
   font-size: 0.9rem;
   line-height: 1.4;
+  width: 100vw;
 }
 
 .gallery-footer a {
-  color: #4da6ff; /* Light blue links for visibility */
+  color: rgb(4, 0, 255); /* Light blue links for visibility */
   text-decoration: none;
 }
 
