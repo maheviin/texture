@@ -15,7 +15,9 @@
   </div>
 
   <main>
-    <div id="gallery" class="gallery-grid" tabindex="0" aria-label="Gallery grid"></div>
+    <div id="gallery" class="gallery-grid" tabindex="0" aria-label="Gallery grid" role="group">
+      <!-- Individual items will be navigable only after entering the group -->
+    </div>
 
     <div class="car" tabindex="0" aria-label="Car render">
       <div id="car-viewer"></div>
@@ -90,6 +92,14 @@
                 detail: { src: img.src, name: fname }
               });
               window.dispatchEvent(ev);
+            });
+
+            img.tabIndex = 0; // Make image focusable
+            img.addEventListener('keydown', (event) => {
+              if (event.key === 'Enter') {
+                // Simulate click on Enter key press
+                img.click();
+              }
             });
 
             gallery.appendChild(img);
