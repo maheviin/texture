@@ -3,7 +3,7 @@
 }
 
 body {
-  margin: 0px 40px 0px 40px;
+  margin: 0px 40px 40px 40px;
   background-color: rgb(4, 0, 255);
   color: white;
   font-family: 'Montserrat', sans-serif;
@@ -146,20 +146,19 @@ h1 {
   transform: translateY(-50%); /* Adjust for exact centering */
 }
 
-
+/* Style for the gallery footer */
 .gallery-footer {
   margin-top: 20px;
   padding: 10px;
-  background-color: white;
-  color: black;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background for contrast */
+  color: white; /* White text for readability */
   text-align: center;
-    width: 100vw;
   font-size: 0.9rem;
   line-height: 1.4;
 }
 
 .gallery-footer a {
-  color: rgb(4, 0, 255);
+  color: #4da6ff; /* Light blue links for visibility */
   text-decoration: none;
 }
 
